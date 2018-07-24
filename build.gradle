@@ -1,0 +1,28 @@
+buildscript {    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.0-alpha03'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+gradle.taskGraph.whenReady { taskExecutionGraph ->
+    for (Task task : taskExecutionGraph.getAllTasks()) {
+         for (Object dependency : task.getTaskDependencies().getDependencies(task)) {
+                println dependency
+         }
+    }
+}
